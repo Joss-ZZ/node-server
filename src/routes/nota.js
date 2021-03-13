@@ -8,13 +8,13 @@ const router = Router();
 //Listar todas las notas
 router.get('/nota', validarJWT, listarNotas);
 
-//Crear nota 
+//Crear nota.
 router.post('/nota', validarJWT, registrarNota);
 
-//Editar nota
+//Editar nota.
 router.put('/nota/:id', validarJWT, actualizarNota);
 
-//Eliminar nota
+//Eliminar nota.
 router.delete('/nota/:id', validarJWT, eliminarNota);
 
 
