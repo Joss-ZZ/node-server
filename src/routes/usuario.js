@@ -17,7 +17,6 @@ app.get('/usuario', validarJWT , listarUsuarios);
 app.put('/usuario/:id',[
     check('nombre', 'El nombre es obligatorio').isLength({ min:1 }),
     check('email', 'El email es obligatorio').isEmail(),
-    check('password', 'El password es obligatorio').isLength({ min: 6 }),
     validarCampos
 ] , validarJWT ,actualizarUsuario);
 

@@ -18,7 +18,7 @@ router.post('/auth/login', [
     validarCampos
 ], loginUsuario);
 
-router.get('auth/renew', validarJWT ,revalidarToken);
+router.get('/auth/renew', validarJWT ,revalidarToken);
 
 
 module.exports = router;

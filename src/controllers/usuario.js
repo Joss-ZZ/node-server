@@ -45,13 +45,15 @@ const actualizarUsuario = async(req, res = response)=> {
 
             userBD.nombre = body.nombre;
             userBD.email = body.email;
-            userBD.password = body.password;
 
             userBD.save();
 
             res.json({
                 ok: true,
-                userBD
+                uid: userDB.id,
+                nombre: userDB.nombre,
+                email: userDB.email,
+                img: userDB.img
             });
 
         }catch(error){
@@ -84,7 +86,7 @@ const actualizarUsuario = async(req, res = response)=> {
     let pathImagen = `${id}-${ new Date().getMilliseconds() }.${extension}`; 
   
     // Use the mv() method to place the file somewhere on your server
-    archivo.mv(`uploads/usuarios/${pathImagen}`, (err) => {
+    archivo.mv(`public/imagenes/usuarios/${pathImagen}`, (err) => {
       if (err)
         return res.status(500).json({
             ok: false,
@@ -118,15 +120,16 @@ async function imagenUsuario(id, body, nombreImagen, res = response) {
 
         userDB.nombre = body.nombre;
         userDB.email = body.email;
-        const salt = bcrypt.genSaltSync();
-        userDB.password = bcrypt.hashSync(body.password, salt);
         userDB.img = nombreImagen;
 
         userDB.save();
 
         return res.json({
             ok: true,
-            userDB
+            uid: userDB.id,
+            nombre: userDB.nombre,
+            email: userDB.email,
+            img: userDB.img
         })
 
     }catch(error){
@@ -142,7 +145,7 @@ async function imagenUsuario(id, body, nombreImagen, res = response) {
 
 function eliminarImagen(nombreImagen) {
 
-    const pathImagenDB = path.resolve(__dirname, `../../uploads/usuarios/${nombreImagen}`);
+    const pathImagenDB = path.resolve(__dirname, `../../public/imagenes/usuarios/${nombreImagen}`);
 
     if(fs.existsSync(pathImagenDB)){
         fs.unlinkSync(pathImagenDB);

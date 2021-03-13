@@ -32,11 +32,12 @@ const loginUsuario = async(req ,res = response) => {
         //Generamos el JWT
         const token = await generarJWT(user.id, user.nombre);
 
-        return res.status(400).json({
+        return res.status(200).json({
             ok: true,
             uid: user.id,
             nombre: user.nombre,
             email: user.email,
+            img: user.img,
             token
         })
 
@@ -82,6 +83,7 @@ const registroUsuario = async(req, res = response)=> {
           uid: userDB.id,
           nombre: userDB.nombre,
           email: userDB.email,
+          img: userDB.img,
           token
         }) 
 
@@ -112,6 +114,7 @@ const revalidarToken = async(req, res = response)=> {
             uid: userDB.id,
             nombre: userDB.nombre,
             email: userDB.email,
+            img: userDB.img,
             token
     }) 
 
